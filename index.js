@@ -4,6 +4,8 @@ const mongoose = require('mongoose');
 const app = express();
 require('dotenv').config()
 
+
+
 app.use(express.json()); //para json
 app.use(express.urlencoded({ extended: true })); //para formularios
 
@@ -14,6 +16,14 @@ mongoose.connect(uri,
 )
 .then(() => console.log('Base de datos conectada'))
 .catch(e => console.log('error db:', e))
+
+// cors
+const cors = require('cors');
+var corsOptions = {
+    origin: '*', // Reemplazar con dominio
+    optionsSuccessStatus: 200 // some legacy browsers (IE11, various SmartTVs) choke on 204
+}
+app.use(cors(corsOptions));
 
 //importar rutas 
 const authRoutes = require('./routes/auth');
